@@ -176,7 +176,6 @@ upstream messages, so vLLM/LiteLLM prefix-caching works across turns.
 - [`@openai/codex-sdk`](https://www.npmjs.com/package/@openai/codex-sdk) v0.129
 - [LiteLLM proxy](https://github.com/BerriAI/litellm) v1.82.6
 - [vLLM](https://github.com/vllm-project/vllm) serving Qwen3.6-27B
-- Chrome MCP server (full namespace expansion path)
 
 ## License
 
