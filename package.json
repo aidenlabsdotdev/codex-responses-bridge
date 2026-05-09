@@ -6,7 +6,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "tsx --experimental-strip-types src/index.ts",
-    "dev": "BRIDGE_LOG_LEVEL=debug tsx --experimental-strip-types --watch src/index.ts",
+    "dev": "LOG_LEVEL=debug tsx --experimental-strip-types --watch src/index.ts",
     "typecheck": "tsc --noEmit"
   },
   "engines": {

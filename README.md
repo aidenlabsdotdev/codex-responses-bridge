@@ -87,7 +87,7 @@ translator, not a policy layer.
 |---|---|---|---|
 | `OPENAI_BASE_URL` | recommended | `http://localhost:4000/v1` | Upstream chat-completions root |
 | `BRIDGE_PORT` | no | `8090` | Listen port |
-| `BRIDGE_LOG_LEVEL` | no | `info` | `error`, `info`, `debug` |
+| `LOG_LEVEL` | no | `info` | `error`, `info`, `debug` |
 
 **Authentication**: the bridge forwards the caller's `Authorization`
 header verbatim to the upstream. Configure your bridge client with the
