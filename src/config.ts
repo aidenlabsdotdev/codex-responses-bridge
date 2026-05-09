@@ -7,7 +7,7 @@
 //                            Default http://localhost:4000/v1.
 //
 // Optional:
-//   BRIDGE_PORT              Listen port. Default 8090.
+//   PORT              Listen port. Default 8090.
 //   LOG_LEVEL         error | info | debug. Default info.
 //
 // Auth: the bridge does NOT hold an upstream API key. It forwards the
@@ -29,7 +29,7 @@ function envInt(name: string, fallback: number): number {
   return fallback;
 }
 
-export const PORT = envInt("BRIDGE_PORT", 8090);
+export const PORT = envInt("PORT", 8090);
 export const OPENAI_BASE_URL =
   process.env.OPENAI_BASE_URL ?? "http://localhost:4000/v1";
 export const LOG_LEVEL = (process.env.LOG_LEVEL ?? "info").toLowerCase();

@@ -19,14 +19,14 @@ COPY src/ ./src/
 RUN chown -R node:node /app
 USER node
 
-# Default port; override with BRIDGE_PORT env. Image documents 8090
-# as the canonical port.
+# Default port; override with PORT env. Image documents 8090 as the
+# canonical port.
 EXPOSE 8090
 
 # Lightweight TCP healthcheck via Node's built-in net module (no curl
 # needed in the image).
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD node -e "require('net').connect(${BRIDGE_PORT:-8090},'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))" \
+  CMD node -e "require('net').connect(${PORT:-8090},'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))" \
    || exit 1
 
 CMD ["npx", "tsx", "--experimental-strip-types", "src/index.ts"]
