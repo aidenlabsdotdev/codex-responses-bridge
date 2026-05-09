@@ -21,23 +21,23 @@ USER node
 
 # Env vars the bridge reads (code defaults match these).
 #
-# Required for sensible behavior:
+# Required:
 #   OPENAI_BASE_URL   Upstream chat-completions root, e.g.
 #                     http://my-litellm:4000/v1 or https://api.openai.com/v1.
-#                     No default — must be supplied at run time.
+#                     No default — the bridge exits 1 on startup if unset.
 #
 # Authentication: bridge has NO API key of its own. The caller's
 # `Authorization` header is forwarded verbatim to the upstream. Set
 # OPENAI_API_KEY (or whatever the upstream expects) on the *client*.
-ENV PORT=8090
+ENV PORT=4001
 ENV LOG_LEVEL=info
 
-EXPOSE 8090
+EXPOSE 4001
 
 # Lightweight TCP healthcheck via Node's built-in net module (no curl
 # needed in the image).
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD node -e "require('net').connect(${PORT:-8090},'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))" \
+  CMD node -e "require('net').connect(${PORT:-4001},'127.0.0.1').on('connect',()=>process.exit(0)).on('error',()=>process.exit(1))" \
    || exit 1
 
 CMD ["npx", "tsx", "--experimental-strip-types", "src/index.ts"]

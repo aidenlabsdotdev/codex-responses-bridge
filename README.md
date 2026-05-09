@@ -47,12 +47,12 @@ tools, and `Authorization` header all flow through from the client.
 ## Quick start (Docker)
 
 ```bash
-docker run --rm -p 8090:8090 \
+docker run --rm -p 4001:4001 \
   -e OPENAI_BASE_URL=http://your-chat-completions-backend:4000/v1 \
   ghcr.io/aidenlabsdotdev/codex-responses-bridge:latest
 ```
 
-Then point your codex client at `http://localhost:8090/v1` and it'll
+Then point your codex client at `http://localhost:4001/v1` and it'll
 work as if it were talking to a real Responses-API endpoint.
 
 For codex-sdk:
@@ -68,7 +68,7 @@ const codex = new Codex({
     model_providers: {
       bridge: {
         name: "via codex-responses-bridge",
-        base_url: "http://localhost:8090/v1",
+        base_url: "http://localhost:4001/v1",
         env_key: "OPENAI_API_KEY",
         wire_api: "responses",             // codex speaks Responses to the bridge
       },
@@ -86,7 +86,7 @@ translator, not a policy layer.
 | Var | Required | Default | Description |
 |---|---|---|---|
 | `OPENAI_BASE_URL` | recommended | `http://localhost:4000/v1` | Upstream chat-completions root |
-| `PORT` | no | `8090` | Listen port |
+| `PORT` | no | `4001` | Listen port |
 | `LOG_LEVEL` | no | `info` | `error`, `info`, `debug` |
 
 **Authentication**: the bridge forwards the caller's `Authorization`
@@ -124,7 +124,7 @@ services:
   responses-bridge:
     image: ghcr.io/aidenlabsdotdev/codex-responses-bridge:latest
     ports:
-      - "8090:8090"
+      - "4001:4001"
     environment:
       OPENAI_BASE_URL: http://litellm:4000/v1
     restart: unless-stopped
