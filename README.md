@@ -61,7 +61,7 @@ For codex-sdk:
 import { Codex } from "@openai/codex-sdk";
 
 const codex = new Codex({
-  apiKey: process.env.MY_BACKEND_API_KEY,  // forwarded as Authorization header
+  apiKey: process.env.OPENAI_API_KEY,  // forwarded as Authorization header
   config: {
     model: "qwen/qwen3.6-27b-think",       // whatever model your upstream knows
     model_provider: "bridge",
@@ -69,7 +69,7 @@ const codex = new Codex({
       bridge: {
         name: "via codex-responses-bridge",
         base_url: "http://localhost:8090/v1",
-        env_key: "MY_BACKEND_API_KEY",
+        env_key: "OPENAI_API_KEY",
         wire_api: "responses",             // codex speaks Responses to the bridge
       },
     },
