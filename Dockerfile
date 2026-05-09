@@ -19,8 +19,19 @@ COPY src/ ./src/
 RUN chown -R node:node /app
 USER node
 
-# Default port; override with PORT env. Image documents 8090 as the
-# canonical port.
+# Env vars the bridge reads (code defaults match these).
+#
+# Required for sensible behavior:
+#   OPENAI_BASE_URL   Upstream chat-completions root, e.g.
+#                     http://my-litellm:4000/v1 or https://api.openai.com/v1.
+#                     No default — must be supplied at run time.
+#
+# Authentication: bridge has NO API key of its own. The caller's
+# `Authorization` header is forwarded verbatim to the upstream. Set
+# OPENAI_API_KEY (or whatever the upstream expects) on the *client*.
+ENV PORT=8090
+ENV LOG_LEVEL=info
+
 EXPOSE 8090
 
 # Lightweight TCP healthcheck via Node's built-in net module (no curl
