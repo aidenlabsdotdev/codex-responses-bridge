@@ -1,0 +1,39 @@
+{
+  "name": "codex-responses-bridge",
+  "version": "0.1.0",
+  "description": "OpenAI Responses API → Chat Completions translator. Lets codex-sdk / codex-rs talk to chat-completions-only backends (vLLM, Ollama, native OpenAI-compatible proxies) with full preserve_thinking and MCP-tool-namespace support.",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx --experimental-strip-types src/index.ts",
+    "dev": "BRIDGE_LOG_LEVEL=debug tsx --experimental-strip-types --watch src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^22.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aidenlabsdotdev/codex-responses-bridge"
+  },
+  "keywords": [
+    "openai",
+    "responses-api",
+    "chat-completions",
+    "codex",
+    "codex-sdk",
+    "codex-rs",
+    "vllm",
+    "litellm",
+    "translator",
+    "proxy"
+  ]
+}
