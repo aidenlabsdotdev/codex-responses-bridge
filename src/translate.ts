@@ -407,7 +407,14 @@ export function responsesToChat(req: ResponsesRequest): {
     messages,
   };
   if (tools.length) chat.tools = tools;
-  if (req.tool_choice !== undefined) chat.tool_choice = req.tool_choice;
+  // Only forward tool_choice when the request actually carries tools.
+  // codex sends ``tool_choice: "auto"`` even on post-completion compaction
+  // turns where it has stripped tools to ask the model for a plain text
+  // summary.  vLLM (correctly) rejects ``tool_choice`` without a
+  // ``tools`` array: "When using `tool_choice`, `tools` must be set."
+  if (tools.length && req.tool_choice !== undefined) {
+    chat.tool_choice = req.tool_choice;
+  }
 
   // OpenAI-standard sampling params: pure pass-through.
   if (req.temperature !== undefined) chat.temperature = req.temperature;
